@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Shuffle</title>
+  </head>
+  <body>
+    
+  <button id="shuffle"> Shuffle the Deck </button>
+
+    <ul id="deck">
+    </ul>
+    <link href="deckstyle.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+      function Card(r, s) {
+        this.rank = r;
+        this.suit = s;
+        this.toHTML = function() {
+          return "<li class='card'>" + this.rank + "-" + this.suit + "</li>";
+        }
+      }
+      function Deck() {
+        var thisDeck = this;
+        this.suits = ['H', 'C', 'D', 'S'];
+        this.ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+//test if this.suit is H .. add class heart 
+$(this.suits[0]).addClass('heart');
+//
+        $.each(thisDeck.suits, function() {
+          var suit = this;
+          $.each(thisDeck.ranks, function() {
+            var rank = this;
+            var card = new Card(rank, suit);
+            $('#deck').append(card.toHTML());
+          });
+        });
+      }
+
+//////
+// $('button').click(function(){ });
+///////
+
+      var shuffle = function(m) {
+        var rand, $rand;
+        rand = Math.floor(Math.random() * m--);
+        $('li:eq(' + m + ')').
+          after($('li:eq(' + rand + ')')).
+          insertBefore($('li:eq(' + rand + ')'))
+        if(m) {
+          setTimeout(shuffle, 250, m);
+          //test CSS
+          $('li:eq(' + m + ')').addClass('testcss');
+          // if it doesnt equal m, change back to #deck
+        }
+      };
+
+      var deck = new Deck();
+      shuffle($('.cards').length);
+    </script>
+  </body>
+</html>
+
+<!-- css ideas - selectors for ones that are being shuffled 
+rows instead of straight -->
+
+
+<!-- ul li:nth-child(2)
+$('li:eq(4)'); = equals
+
+$('li:eq(0)').after($('li:eq(4)'));
+$('li:eq(4)').after($('li:eq(0)'));
+
+
+ -->
