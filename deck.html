@@ -4,7 +4,7 @@
     <title>Shuffle</title>
   </head>
   <body>
-    
+
   <button id="shuffle"> Shuffle the Deck </button>
 
     <ul id="deck">
@@ -17,16 +17,15 @@
         this.rank = r;
         this.suit = s;
         this.toHTML = function() {
-          return "<li class='card'>" + this.rank + "-" + this.suit + "</li>";
+          return "<li class='card'>" + this.rank + " " + this.suit + "</li>";
         }
       }
       function Deck() {
         var thisDeck = this;
         this.suits = ['H', 'C', 'D', 'S'];
         this.ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-//test if this.suit is H .. add class heart 
-$(this.suits[0]).addClass('heart');
-//
+
+
         $.each(thisDeck.suits, function() {
           var suit = this;
           $.each(thisDeck.ranks, function() {
@@ -37,10 +36,6 @@ $(this.suits[0]).addClass('heart');
         });
       }
 
-//////
-// $('button').click(function(){ });
-///////
-
       var shuffle = function(m) {
         var rand, $rand;
         rand = Math.floor(Math.random() * m--);
@@ -49,20 +44,24 @@ $(this.suits[0]).addClass('heart');
           insertBefore($('li:eq(' + rand + ')'))
         if(m) {
           setTimeout(shuffle, 250, m);
-          //test CSS
           $('li:eq(' + m + ')').addClass('testcss');
-          // if it doesnt equal m, change back to #deck
         }
       };
 
-      var deck = new Deck();
+    var deck = new Deck();
+
+    $("li:contains('H')").addClass('hearts');
+    $("li:contains('S')").addClass('spades');
+    $("li:contains('C')").addClass('clubs');
+    $("li:contains('D')").addClass('diamonds');
+
+    $('#shuffle').click(function(){
       shuffle($('.cards').length);
+    });
+
     </script>
   </body>
 </html>
-
-<!-- css ideas - selectors for ones that are being shuffled 
-rows instead of straight -->
 
 
 <!-- ul li:nth-child(2)
