@@ -81,3 +81,7 @@ ul li {
   color: rgba(0, 0, 0, 0);
   }
 
+  .testcss:hover {
+    color: rgba(0, 0, 0, .5);
+  }
+
